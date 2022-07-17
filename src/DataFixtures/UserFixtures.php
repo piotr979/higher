@@ -18,13 +18,13 @@ class UserFixtures extends Fixture
     public function load(ObjectManager $manager): void
     {
        $emails = [
-        'adh@gmail.com','user@user.com', 'user2@user2.com'
+        'adh@gmail.com','user@user.com', 'user2@user2.com', 'admin@admin.com'
        ];
        $firstName = [
-        'John','Andrea', 'Robert'
+        'John','Andrea', 'Robert', 'Admin'
        ];
        $lastName = [
-        'Murphy', 'Jackson','Edwin'
+        'Murphy', 'Jackson','Edwin', 'Admin'
        ];
        $bio = [
         'John Murphy is a developer based in India. He enjoys solving complex
@@ -35,12 +35,14 @@ class UserFixtures extends Fixture
           'Robert Edwin has been writing for over 30 years,
           and is currently a web developer in New Zealand. 
           His special interests include Gardening, parenting,
-           and role-playing games.'
+           and role-playing games.',
+           'Admin'
        ];
        $images = [
         'uploads/users/christian-buehner-DItYlc26zVI-unsplash.jpg',
         'uploads/users/christian-buehner-DItYlc26zVI-unsplash.jpg',
-        'uploads/users/ben-parker-OhKElOkQ3RE-unsplash.jpg'
+        'uploads/users/ben-parker-OhKElOkQ3RE-unsplash.jpg',
+        ''
        ];
        $users = [];
        for($i=0; $i<=(count($emails)-1); $i++) 
@@ -72,6 +74,9 @@ class UserFixtures extends Fixture
        
         $user = new User();
         $user->setEmail($email);
+        if ($email == 'admin@admin.com') {
+            $user->setRoles(["ROLE_ADMIN"]);
+        }
         $user->setFirstName($firstName);
         $user->setLastName($lastName);
         $user->setPhotoUrl($imageUrl);

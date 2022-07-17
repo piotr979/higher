@@ -1,16 +1,16 @@
 version: '3.8'
  
 services:
-    mysql-db:
+    db:
         platform: linux/x86_64
         image: mysql:5.7
         environment:
-            - MYSQL_ROOT_PASSWORD=rootpassword
-            - MYSQL_PASSWORD=password
+            - MYSQL_ROOT_PASSWORD=rootpass
+            - MYSQL_PASSWORD=userpass
             - MYSQL_DATABASE=higher
             - MYSQL_USER=user
         ports:
-            - "3306:3306"
+            - "9906:3306"
     web:
         build: .
         ports:
@@ -23,10 +23,10 @@ services:
             - '8100:80'
         restart: always
         environment:
-            PMA_HOST: mysql-db
+            PMA_HOST: db
         depends_on:
-            - mysql-db
+            - db
 
             
 volumes:
-  my-db: 
+  higher-db: 
